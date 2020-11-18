@@ -37,11 +37,13 @@ int main()
     //     }
     // }
 
+
     std::cout << "Total number of vertices in this graph: " << new_csr->num_vertices << std::endl;
 
     auto start = std::chrono::steady_clock::now();
     int sizemax = new_csr->num_vertices * new_csr->num_vertices * 3;
     float *fin_array_rai = new float[int(sizemax)];
+
 
     for (int i = 0; i < sizemax; i++)
     {
@@ -107,6 +109,7 @@ int main()
                 fin_array_aai[newsize] = k;
                 fin_array_jackard[newsize] = k;
                 fin_array_pa[newsize] = k;
+
                 int intersection = 0;
                 int union_nodes = 0;
                 float sum_rai = 0;
@@ -144,6 +147,7 @@ int main()
         }
         
     }
+
     auto end = std::chrono::steady_clock::now();
     ofstream rai, aai, jackard, pa;
     rai.open("rai.txt");
@@ -156,6 +160,7 @@ int main()
     std::cout <<"Total not connected pair size: "<< (newsize + 1)/3 <<std::endl;
     std::cout <<"Time elapsed to calculate the metrics: "<< elapsed_seconds.count() << "s\n\n";
     /*int k = 1;
+
     for (int t = 0; t < newsize+1; t+=3)
     {
         rai << fin_array_rai[t] << " " << fin_array_rai[t+1] << " " << fin_array_rai[t+2] << std::endl;
@@ -178,6 +183,7 @@ int main()
         //std::cout<< k << "th jackard = " << fin_array_jackard[t] << " " << fin_array_jackard[t+1] << " " << fin_array_jackard[t+2] << std::endl;
         k++;
     }
+
     //std::cout<< "-----------------------------" << std::endl;
     k = 1;
     for (int t = 0; t < newsize+1; t+=3)
@@ -186,6 +192,7 @@ int main()
         //std::cout<< k << "th pa = " << fin_array_pa[t] << " " << fin_array_pa[t+1] << " " << fin_array_pa[t+2] << std::endl;
         k++;
     }*/
+r
     
 
 
