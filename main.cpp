@@ -1,8 +1,10 @@
 
 #include <iostream>
+#include <chrono>
+#include <fstream>
 #include <string>
 #include <cstring>
-#include<stdio.h>
+#include <stdio.h>
 #include <math.h>
 #include "csr.h"
 
@@ -12,13 +14,16 @@
 
 int main()
 {
-    std::cout << "Hello World" << std::endl;
+    
+
+
+    std::cout << "Welcome to our similarity metric calculator...\n" << std::endl;
     
     // take graph generate 2 way embedding,print out two way embedding edges, positive ones. print 
     // calculate the metrics between 2 edges. output a |E| * 2 x |M| contains two way of (1,2), (3,4), (5,6)
     // times 2 because there are non existing connections such as (1,6), (3,2), (1,5) 
 
-    string path = "denemegraph.graph";
+    string path = "facebook_combined_c.graph";
     CSR<unsigned int> *new_csr = new CSR<unsigned int>(path, false,false);
     
     // for (unsigned int i = 0; i < new_csr->num_vertices; i++)
@@ -31,8 +36,14 @@ int main()
             
     //     }
     // }
+
+
+    std::cout << "Total number of vertices in this graph: " << new_csr->num_vertices << std::endl;
+
+    auto start = std::chrono::steady_clock::now();
     int sizemax = new_csr->num_vertices * new_csr->num_vertices * 3;
     float *fin_array_rai = new float[int(sizemax)];
+
 
     for (int i = 0; i < sizemax; i++)
     {
@@ -98,7 +109,7 @@ int main()
                 fin_array_aai[newsize] = k;
                 fin_array_jackard[newsize] = k;
                 fin_array_pa[newsize] = k;
-                
+
                 int intersection = 0;
                 int union_nodes = 0;
                 float sum_rai = 0;
@@ -137,38 +148,51 @@ int main()
         
     }
 
-    std::cout <<"merahab"<< newsize<<std::endl;
-    int k = 1;
+    auto end = std::chrono::steady_clock::now();
+    ofstream rai, aai, jackard, pa;
+    rai.open("rai.txt");
+    aai.open("aai.txt");
+    jackard.open("jackard.txt");
+    pa.open("pa.txt");
+
+    std::chrono::duration<double> elapsed_seconds = end - start;
+
+    std::cout <<"Total not connected pair size: "<< (newsize + 1)/3 <<std::endl;
+    std::cout <<"Time elapsed to calculate the metrics: "<< elapsed_seconds.count() << "s\n\n";
+    /*int k = 1;
+
     for (int t = 0; t < newsize+1; t+=3)
     {
-        
-        std::cout<< k << "th rai = " << fin_array_rai[t] << " " << fin_array_rai[t+1] << " " << fin_array_rai[t+2] << std::endl;
+        rai << fin_array_rai[t] << " " << fin_array_rai[t+1] << " " << fin_array_rai[t+2] << std::endl;
+        //std::cout<< k << "th rai = " << fin_array_rai[t] << " " << fin_array_rai[t+1] << " " << fin_array_rai[t+2] << std::endl;
         k++;
     }
-    std::cout<< "-----------------------------" << std::endl;
+    //std::cout<< "-----------------------------" << std::endl;
     k = 1;
     for (int t = 0; t < newsize+1; t+=3)
     {
-        
-        std::cout<< k << "th aai = " << fin_array_aai[t] << " " << fin_array_aai[t+1] << " " << fin_array_aai[t+2] << std::endl;
+        aai << fin_array_aai[t] << " " << fin_array_aai[t+1] << " " << fin_array_aai[t+2] << std::endl;
+        //std::cout<< k << "th aai = " << fin_array_aai[t] << " " << fin_array_aai[t+1] << " " << fin_array_aai[t+2] << std::endl;
         k++;
     }
-    std::cout<< "-----------------------------" << std::endl;
+    //std::cout<< "-----------------------------" << std::endl;
     k = 1;
     for (int t = 0; t < newsize+1; t+=3)
     {
-        
-        std::cout<< k << "th jackard = " << fin_array_jackard[t] << " " << fin_array_jackard[t+1] << " " << fin_array_jackard[t+2] << std::endl;
+        jackard << fin_array_jackard[t] << " " << fin_array_jackard[t+1] << " " << fin_array_jackard[t+2] << std::endl;
+        //std::cout<< k << "th jackard = " << fin_array_jackard[t] << " " << fin_array_jackard[t+1] << " " << fin_array_jackard[t+2] << std::endl;
         k++;
     }
-    std::cout<< "-----------------------------" << std::endl;
+
+    //std::cout<< "-----------------------------" << std::endl;
     k = 1;
     for (int t = 0; t < newsize+1; t+=3)
     {
-        
-        std::cout<< k << "th pa = " << fin_array_pa[t] << " " << fin_array_pa[t+1] << " " << fin_array_pa[t+2] << std::endl;
+        pa << fin_array_pa[t] << " " << fin_array_pa[t+1] << " " << fin_array_pa[t+2] << std::endl;
+        //std::cout<< k << "th pa = " << fin_array_pa[t] << " " << fin_array_pa[t+1] << " " << fin_array_pa[t+2] << std::endl;
         k++;
-    }
+    }*/
+r
     
 
 
