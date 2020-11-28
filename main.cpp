@@ -493,7 +493,6 @@ int main()
 
     
     /*int k = 1;
-
     for (int t = 0; t < newsize+1; t+=3)
     {
         //rai << fin_array_rai[t] << " " << fin_array_rai[t+1] << " " << fin_array_rai[t+2] << std::endl;
@@ -524,7 +523,6 @@ int main()
         std::cout<< k << "th pa = " << fin_array_pa[t] << " " << fin_array_pa[t+1] << " " << fin_array_pa[t+2] << std::endl;
         k++;
     }*/
-
     
     
     
